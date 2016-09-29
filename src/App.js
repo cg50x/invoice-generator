@@ -9,7 +9,8 @@ import {
   Form,
   FormGroup,
   ControlLabel,
-  FormControl
+  FormControl,
+  Button
 } from 'react-bootstrap';
 
 import LineItemList from './LineItemList.js';
@@ -37,6 +38,7 @@ class App extends Component {
     this.onLineItemRateChange = this.onLineItemRateChange.bind(this);
     this.onLineItemDeleteClick = this.onLineItemDeleteClick.bind(this);
     this.onLineItemAddClick = this.onLineItemAddClick.bind(this);
+    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
   onInvoiceNumberChange(event) {
@@ -98,6 +100,10 @@ class App extends Component {
     this.setState({
       lineItems: lineItems
     });
+  }
+
+  onSubmitClick() {
+    alert('clicked!');
   }
 
   render() {
@@ -164,6 +170,11 @@ class App extends Component {
               onLineItemAddClick={this.onLineItemAddClick}
               >
             </LineItemList>
+            <FormGroup>
+              <Col smOffset={10} sm={2}>
+                <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
+              </Col>
+            </FormGroup>
           </Form>
         </div>
       </div>

@@ -56,7 +56,7 @@ class LineItemList extends Component {
                 {lineItem.quantity * lineItem.rate}
               </Col>
               <Col sm={1}>
-                <Button onClick={this.onLineItemDeleteClick.bind(this, index)}>X</Button>
+                <Button bsStyle="danger" onClick={this.onLineItemDeleteClick.bind(this, index)}>X</Button>
               </Col>
             </Row>
 		)});
@@ -75,7 +75,7 @@ class LineItemList extends Component {
               {lineItemRows}
               <Row>
               	<Col sm={8}>
-                  <Button onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
+                  <Button bsStyle="success" onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
                 </Col>
                 <Col sm={1}></Col>
                 <Col sm={1}>Subtotal</Col>
