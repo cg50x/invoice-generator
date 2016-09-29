@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-
-import 'bootstrap/dist/css/bootstrap.css';
-
 import {
   PageHeader,
   Col,
@@ -12,8 +8,11 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
+import './App.css';
 import LineItemList from './LineItemList.js';
+import { saveInvoicePDF } from './PDFService.js';
 
 class App extends Component {
   constructor() {
@@ -103,7 +102,7 @@ class App extends Component {
   }
 
   onSubmitClick() {
-    alert('clicked!');
+    saveInvoicePDF();
   }
 
   render() {
