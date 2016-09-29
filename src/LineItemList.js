@@ -43,7 +43,7 @@ class LineItemList extends Component {
 		let lineItemRows = lineItems.map((lineItem, index) => {
 			return (
 			  <Row key={index}>
-              <Col sm={8}>
+              <Col sm={6}>
                 <FormControl type="text" value={lineItem.description} onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
               </Col>
               <Col sm={1}>
@@ -66,7 +66,7 @@ class LineItemList extends Component {
 		return (
             <Grid>
               <Row>
-                <Col sm={8}>Item</Col>
+                <Col sm={6}>Item</Col>
                 <Col sm={1}>Quantity</Col>
                 <Col sm={1}>Rate</Col>
                 <Col sm={1}>Amount</Col>
@@ -74,7 +74,7 @@ class LineItemList extends Component {
               </Row>
               {lineItemRows}
               <Row>
-              	<Col sm={8}>
+              	<Col sm={6}>
                   <Button bsStyle="success" onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
                 </Col>
                 <Col sm={1}></Col>
