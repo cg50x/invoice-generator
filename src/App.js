@@ -102,7 +102,7 @@ class App extends Component {
   }
 
   onSubmitClick() {
-    saveInvoicePDF();
+    saveInvoicePDF(this.state);
   }
 
   render() {
