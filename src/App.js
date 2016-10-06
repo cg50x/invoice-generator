@@ -23,7 +23,6 @@ class App extends Component {
       toName: '',
       date: '',
       dueDate: '',
-      balanceDue: 0,
       lineItems: [{
         description: '',
         quantity: 0,
@@ -150,14 +149,6 @@ class App extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl type="date" value={this.state.dueDate} onChange={this.onFieldValueChange.bind(this, 'dueDate')}/>
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="balanceDue">
-              <Col componentClass={ ControlLabel } sm={2}>
-                Balance Due
-              </Col>
-              <Col sm={10}>
-                <FormControl type="number" min="0.01" step="0.01" value={this.state.balanceDue} onChange={this.onFieldValueChange.bind(this, 'balanceDue')}/>
               </Col>
             </FormGroup>
             <LineItemList
