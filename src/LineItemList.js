@@ -4,11 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import {
   Button,
-  Grid,
   Row,
   Col,
-  FormControl,
-  FormGroup
+  FormControl
 } from 'react-bootstrap';
 
 class LineItemList extends Component {
