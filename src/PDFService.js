@@ -77,6 +77,6 @@ function buildLineItem(lineItem) {
 		lineItem.description,
 		lineItem.quantity,
 		lineItem.rate,
-		lineItem.quantity * lineItem.rate
+		String(lineItem.quantity * lineItem.rate)
 	];
 }
