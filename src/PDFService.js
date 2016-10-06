@@ -42,10 +42,10 @@ function buildHeaderInformation(params) {
 				},{
 					width: '*',
 					columns: [{
-						stack: ['Date', 'Due Date'],
+						stack: ['Date', 'Payment Terms', 'Due Date'],
 						alignment: 'right'
 					},{
-						stack: [params.date, params.dueDate],
+						stack: [params.date, params.paymentTerms, params.dueDate],
 						alignment: 'right'
 					}]
 				}]

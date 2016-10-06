@@ -143,6 +143,14 @@ class App extends Component {
                 <FormControl type="date" value={this.state.date} onChange={this.onFieldValueChange.bind(this, 'date')}/>
               </Col>
             </FormGroup>
+            <FormGroup controlId="paymentTerms">
+              <Col componentClass={ ControlLabel } sm={2}>
+                Payment Terms
+              </Col>
+              <Col sm={10}>
+                <FormControl type="text" placeholder="4" value={this.state.paymentTerms} onChange={this.onFieldValueChange.bind(this, 'paymentTerms')}/>
+              </Col>
+            </FormGroup>
             <FormGroup controlId="dueDate">
               <Col componentClass={ ControlLabel } sm={2}>
                 Due Date
