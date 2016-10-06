@@ -7,7 +7,8 @@ import {
   Grid,
   Row,
   Col,
-  FormControl
+  FormControl,
+  FormGroup
 } from 'react-bootstrap';
 
 class LineItemList extends Component {
@@ -43,7 +44,7 @@ class LineItemList extends Component {
 		let lineItemRows = lineItems.map((lineItem, index) => {
 			return (
 			  <Row key={index}>
-              <Col sm={6}>
+              <Col sm={8}>
                 <FormControl type="text" value={lineItem.description} onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
               </Col>
               <Col sm={1}>
@@ -64,25 +65,25 @@ class LineItemList extends Component {
 			return sum + lineItem.quantity * lineItem.rate;
 		}, 0);
 		return (
-            <Grid>
-              <Row>
-                <Col sm={6}>Item</Col>
-                <Col sm={1}>Quantity</Col>
-                <Col sm={1}>Rate</Col>
-                <Col sm={1}>Amount</Col>
-                <Col sm={1}></Col>
-              </Row>
-              {lineItemRows}
-              <Row>
-              	<Col sm={6}>
-                  <Button bsStyle="success" onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
-                </Col>
-                <Col sm={1}></Col>
-                <Col sm={1}>Subtotal</Col>
-                <Col sm={1}>{lineItemsTotal}</Col>
-                <Col sm={1}></Col>
-              </Row>
-            </Grid>
+      <div>
+        <Row>
+          <Col sm={8}>Item</Col>
+          <Col sm={1}>Quantity</Col>
+          <Col sm={1}>Rate</Col>
+          <Col sm={1}>Amount</Col>
+          <Col sm={1}></Col>
+        </Row>
+        {lineItemRows}
+        <Row>
+        	<Col sm={8}>
+            <Button bsStyle="success" onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
+          </Col>
+          <Col sm={1}></Col>
+          <Col sm={1}>Subtotal</Col>
+          <Col sm={1}>{lineItemsTotal}</Col>
+          <Col sm={1}></Col>
+        </Row>
+      </div>
           );
 	}
 }
