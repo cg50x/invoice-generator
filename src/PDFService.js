@@ -145,8 +145,8 @@ function buildNotesAndTerms(params) {
 function buildLineItem(lineItem) {
 	return [
 		lineItem.description,
-		{ text: lineItem.quantity, alignment: 'right' },
-		{ text: lineItem.rate, alignment: 'right' },
+		{ text: String(lineItem.quantity), alignment: 'right' },
+		{ text: String(lineItem.rate), alignment: 'right' },
 		{ text: String(lineItem.quantity * lineItem.rate), alignment: 'right' }
 	];
 }
