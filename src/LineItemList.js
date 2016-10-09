@@ -77,7 +77,7 @@ class LineItemList extends Component {
             <Button bsStyle="success" onClick={this.props.onLineItemAddClick}>+ Add Line Item</Button>
           </Col>
           <Col sm={1}></Col>
-          <Col sm={1}>Subtotal</Col>
+          <Col sm={1}>Total</Col>
           <Col sm={1}>{lineItemsTotal}</Col>
           <Col sm={1}></Col>
         </Row>
