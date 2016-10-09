@@ -7,11 +7,14 @@ export function saveInvoicePDF (params) {
 
 // Private functions
 function buildDocDefinition(params) {
+	let notesAndTerms = buildNotesAndTerms(params);
+	console.log('notesAndTerms', notesAndTerms);
 	return {
 	  content: [
 	  	buildHeaderInformation(params),
 	    buildLineItemsTable(params),
-	    buildTotal(params)
+	    buildTotal(params),
+	    ...buildNotesAndTerms(params)
 	  ]
 	};
 }
@@ -96,8 +99,28 @@ function buildTotal(params) {
 				}]
 			]
 		},
-		layout: 'noBorders'
+		layout: 'noBorders',
+		margin: [0, 0, 0, 30]
 	};
+}
+
+// Returns an array
+function buildNotesAndTerms(params) {
+	let result = [];
+	console.log('params', params);
+	if (params.notes) {
+		result = result.concat([
+			{ text: 'Notes' },
+			{ text: params.notes, margin: [0, 0, 0, 30] }
+		]);
+	}
+	if (params.terms) {
+		result = result.concat([
+			{ text: 'Terms' },
+			{ text: params.terms, margin: [0, 0, 0, 30] }
+		]);
+	}
+	return result;
 }
 
 function buildLineItem(lineItem) {

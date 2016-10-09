@@ -18,16 +18,23 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      invoiceNumber: '',
-      fromName: '',
-      toName: '',
-      date: '',
-      dueDate: '',
+      invoiceNumber: '123',
+      fromName: 'Chris',
+      paymentTerms: 'terms terms',
+      toName: 'Not Chris',
+      date: '2012-12-12',
+      dueDate: '2012-12-12',
       lineItems: [{
-        description: '',
-        quantity: 0,
-        rate: 0
-      }]
+        description: 'Item #1',
+        quantity: 1,
+        rate: 1.50
+      }, {
+        description: 'Item #2',
+        quantity: 2,
+        rate: 2.50
+      }],
+      notes: 'Notes are here',
+      terms: 'Terms are here!'
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
@@ -168,6 +175,24 @@ class App extends Component {
               onLineItemAddClick={this.onLineItemAddClick}
               >
             </LineItemList>
+            <FormGroup>
+              <ControlLabel>Notes</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                placeholder="Notes - any relevant information not already covered"
+                value={this.state.notes}
+                onChange={this.onFieldValueChange.bind(this, 'notes')}
+              ></FormControl>
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Terms</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                placeholder="Terms and conditions - late fees, payment methods, delivery schedule"
+                value={this.state.terms}
+                onChange={this.onFieldValueChange.bind(this, 'terms')}
+              ></FormControl>
+            </FormGroup>
             <FormGroup>
               <Col smOffset={10} sm={2}>
                 <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
