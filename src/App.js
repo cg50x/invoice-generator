@@ -141,7 +141,7 @@ class App extends Component {
                 From
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="Who is this invoice from?" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
+                <FormControl componentClass="textarea" rows="3" placeholder="Who is this invoice from?" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="imageLogo">
@@ -157,7 +157,7 @@ class App extends Component {
                 Bill To
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="Who is this invoice to?" value={this.state.toName} onChange={this.onFieldValueChange.bind(this, 'toName')}/>
+                <FormControl componentClass="textarea" rows="3" placeholder="Who is this invoice to?" value={this.state.toName} onChange={this.onFieldValueChange.bind(this, 'toName')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="date">
