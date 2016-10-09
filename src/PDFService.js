@@ -1,11 +1,28 @@
 const pdfMake = window.pdfMake;
 
 export function saveInvoicePDF (params) {
+	if (params.imageLogo) {
+		console.log('imageLogo', params.imageLogo);
+		let fileReader = new FileReader();
+		fileReader.addEventListener('load', onDataURLLoaded.bind(null, params, fileReader), false);
+		fileReader.readAsDataURL(params.imageLogo);
+	} else {
+		createPDFFromParams(params);
+	}
+}
+
+// Private functions
+function onDataURLLoaded(params, fileReader) {
+	// Set imageLogo to data URI of file
+	params.imageLogo = fileReader.result;
+	createPDFFromParams(params);
+}
+
+function createPDFFromParams(params) {
 	let docDefinition = buildDocDefinition(params);
 	pdfMake.createPdf(docDefinition).open();
 }
 
-// Private functions
 function buildDocDefinition(params) {
 	let notesAndTerms = buildNotesAndTerms(params);
 	console.log('notesAndTerms', notesAndTerms);
@@ -22,7 +39,9 @@ function buildDocDefinition(params) {
 function buildHeaderInformation(params) {
 	return {
 		columns: [{
-			stack: [{
+			stack: [
+			...buildImageLogo(params),
+			{
 				text: params.fromName,
 				margin: [0, 30, 0, 30]
 			},{
@@ -130,4 +149,14 @@ function buildLineItem(lineItem) {
 		{ text: lineItem.rate, alignment: 'right' },
 		{ text: String(lineItem.quantity * lineItem.rate), alignment: 'right' }
 	];
+}
+
+function buildImageLogo(params) {
+	let result = [];
+	if (params.imageLogo) {
+		result.push({
+			image: params.imageLogo
+		});
+	}
+	return result;
 }

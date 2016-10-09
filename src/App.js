@@ -20,6 +20,7 @@ class App extends Component {
     this.state = {
       invoiceNumber: '123',
       fromName: 'Chris',
+      imageLogo: null,
       paymentTerms: 'terms terms',
       toName: 'Not Chris',
       date: '2012-12-12',
@@ -57,6 +58,15 @@ class App extends Component {
     let newVal = event.target.value;
     let stateUpdate = {};
     stateUpdate[propertyName] = newVal;
+    this.setState(stateUpdate);
+  }
+
+  onImageLogoChange(event) {
+    let files = event.target.files;
+    let stateUpdate = {};
+    if (files.length > 0) {
+      stateUpdate.imageLogo = files[0];
+    }
     this.setState(stateUpdate);
   }
 
@@ -132,6 +142,14 @@ class App extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl type="text" placeholder="4" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
+              </Col>
+            </FormGroup>
+            <FormGroup controlId="imageLogo">
+              <Col componentClass={ ControlLabel } sm={2}>
+                Logo
+              </Col>
+              <Col sm={10}>
+                <FormControl type="file" placeholder="4" onChange={this.onImageLogoChange.bind(this)}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="toName">
