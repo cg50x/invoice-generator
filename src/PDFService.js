@@ -10,7 +10,8 @@ function buildDocDefinition(params) {
 	return {
 	  content: [
 	  	buildHeaderInformation(params),
-	    buildLineItemsTable(params)
+	    buildLineItemsTable(params),
+	    buildSubtotal(params)
 	  ]
 	};
 }
@@ -65,18 +66,45 @@ function buildLineItemsTable(params) {
     		widths: ['*', '10%', '10%', '10%'],
     		headerRows: 1,
     		body: [
-    			['Item', 'Quantity', 'Rate', 'Amount'],
+    			[
+    				'Item',
+    				{ text: 'Quantity', alignment: 'right' },
+    				{ text: 'Rate', alignment: 'right' },
+    				{ text: 'Amount', alignment: 'right' }
+    			],
     			...lineItemRows
     		]
-    	}
+    	},
+    	layout: 'lightHorizontalLines'
     };
+}
+
+function buildSubtotal(params) {
+	let subtotal = params.lineItems.reduce((sum, lineItem) => {
+		return sum + lineItem.quantity * lineItem.rate;
+	}, 0);
+	return {
+		table: {
+			widths: ['*', '10%'],
+			body: [
+				[{
+					text: 'Subtotal',
+					alignment: 'right'
+				}, {
+					text: String(subtotal),
+					alignment: 'right'
+				}]
+			]
+		},
+		layout: 'noBorders'
+	};
 }
 
 function buildLineItem(lineItem) {
 	return [
 		lineItem.description,
-		lineItem.quantity,
-		lineItem.rate,
-		String(lineItem.quantity * lineItem.rate)
+		{ text: lineItem.quantity, alignment: 'right' },
+		{ text: lineItem.rate, alignment: 'right' },
+		{ text: String(lineItem.quantity * lineItem.rate), alignment: 'right' }
 	];
 }
