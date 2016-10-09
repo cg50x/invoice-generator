@@ -11,7 +11,7 @@ function buildDocDefinition(params) {
 	  content: [
 	  	buildHeaderInformation(params),
 	    buildLineItemsTable(params),
-	    buildSubtotal(params)
+	    buildTotal(params)
 	  ]
 	};
 }
@@ -79,8 +79,8 @@ function buildLineItemsTable(params) {
     };
 }
 
-function buildSubtotal(params) {
-	let subtotal = params.lineItems.reduce((sum, lineItem) => {
+function buildTotal(params) {
+	let total = params.lineItems.reduce((sum, lineItem) => {
 		return sum + lineItem.quantity * lineItem.rate;
 	}, 0);
 	return {
@@ -88,10 +88,10 @@ function buildSubtotal(params) {
 			widths: ['*', '10%'],
 			body: [
 				[{
-					text: 'Subtotal',
+					text: 'Total',
 					alignment: 'right'
 				}, {
-					text: String(subtotal),
+					text: String(total),
 					alignment: 'right'
 				}]
 			]
