@@ -133,7 +133,7 @@ class App extends Component {
                 Invoice #
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="4" value={this.state.invoiceNumber} onChange={this.onFieldValueChange.bind(this, 'invoiceNumber')}/>
+                <FormControl type="text" value={this.state.invoiceNumber} onChange={this.onFieldValueChange.bind(this, 'invoiceNumber')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="fromName">
@@ -141,7 +141,7 @@ class App extends Component {
                 From
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="4" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
+                <FormControl type="text" placeholder="Who is this invoice from?" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="imageLogo">
@@ -149,7 +149,7 @@ class App extends Component {
                 Logo
               </Col>
               <Col sm={10}>
-                <FormControl type="file" placeholder="4" onChange={this.onImageLogoChange.bind(this)}/>
+                <FormControl type="file" onChange={this.onImageLogoChange.bind(this)}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="toName">
@@ -157,7 +157,7 @@ class App extends Component {
                 Bill To
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="4" value={this.state.toName} onChange={this.onFieldValueChange.bind(this, 'toName')}/>
+                <FormControl type="text" placeholder="Who is this invoice to?" value={this.state.toName} onChange={this.onFieldValueChange.bind(this, 'toName')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="date">
@@ -173,7 +173,7 @@ class App extends Component {
                 Payment Terms
               </Col>
               <Col sm={10}>
-                <FormControl type="text" placeholder="4" value={this.state.paymentTerms} onChange={this.onFieldValueChange.bind(this, 'paymentTerms')}/>
+                <FormControl type="text" value={this.state.paymentTerms} onChange={this.onFieldValueChange.bind(this, 'paymentTerms')}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="dueDate">
