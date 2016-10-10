@@ -39,6 +39,7 @@ class App extends Component {
     this.onLineItemAddClick = this.onLineItemAddClick.bind(this);
     this.onExampleLinkClick = this.onExampleLinkClick.bind(this);
     this.onClearFormClick = this.onClearFormClick.bind(this);
+    this.onRemoveImageClick = this.onRemoveImageClick.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
@@ -150,6 +151,17 @@ class App extends Component {
     });
   }
 
+  onRemoveImageClick() {
+    // Clear out the input file element
+    let inputElem = document.getElementById('image-logo-id');
+    inputElem.value = '';
+
+    // Clear out the imageLogo on the state
+    this.setState({
+      imageLogo: null
+    });
+  }
+
   onSubmitClick() {
     saveInvoicePDF(this.state);
   }
@@ -184,7 +196,8 @@ class App extends Component {
                 Logo
               </Col>
               <Col sm={10}>
-                <FormControl type="file" onChange={this.onImageLogoChange.bind(this)}/>
+                <FormControl id="image-logo-id" type="file" onChange={this.onImageLogoChange.bind(this)}/>
+                { this.state.imageLogo ? <a onClick={this.onRemoveImageClick}>Remove image</a> : null }
               </Col>
             </FormGroup>
             <FormGroup controlId="toName">
