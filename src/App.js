@@ -19,24 +19,16 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      invoiceNumber: '123',
-      fromName: 'Chris',
+      invoiceNumber: '',
+      fromName: '',
       imageLogo: null,
-      paymentTerms: 'terms terms',
-      toName: 'Not Chris',
-      date: '2012-12-12',
-      dueDate: '2012-12-12',
-      lineItems: [{
-        description: 'Item #1',
-        quantity: 1,
-        rate: 1.50
-      }, {
-        description: 'Item #2',
-        quantity: 2,
-        rate: 2.50
-      }],
-      notes: 'Notes are here',
-      terms: 'Terms are here!'
+      paymentTerms: '',
+      toName: '',
+      date: '',
+      dueDate: '',
+      lineItems: [],
+      notes: '',
+      terms: ''
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
@@ -45,6 +37,7 @@ class App extends Component {
     this.onLineItemRateChange = this.onLineItemRateChange.bind(this);
     this.onLineItemDeleteClick = this.onLineItemDeleteClick.bind(this);
     this.onLineItemAddClick = this.onLineItemAddClick.bind(this);
+    this.onExampleLinkClick = this.onExampleLinkClick.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
@@ -118,6 +111,29 @@ class App extends Component {
     });
   }
 
+  onExampleLinkClick() {
+    this.setState({
+      invoiceNumber: '123',
+      fromName: 'John Smith\n123 Address St.\nLos Angeles, CA 12345',
+      imageLogo: null,
+      paymentTerms: 'Biweekly',
+      toName: 'Jane Smith\n999 Address St.\nSeattle, WA 54321',
+      date: '2016-10-10',
+      dueDate: '2016-11-01',
+      lineItems: [{
+        description: 'Item #1',
+        quantity: 1,
+        rate: 1.50
+      }, {
+        description: 'Item #2',
+        quantity: 2,
+        rate: 2.50
+      }],
+      notes: 'This invoice does not include service fees.',
+      terms: 'Payment must be made via PayPal.'
+    });
+  }
+
   onSubmitClick() {
     saveInvoicePDF(this.state);
   }
@@ -126,7 +142,9 @@ class App extends Component {
     return (
       <div className="App">
         <PageHeader>Invoice Generator</PageHeader>
-        <p>This is a small invoice generator that is entirely contained on the client side.</p>
+        <p>
+          This is an invoice generator. Fill in the fields below and click 'Create Invoice' to generate the invoice as a PDF document. <a onClick={this.onExampleLinkClick}>Click here</a> to see an example.
+        </p>
         <div className="App-invoice">
           <Form horizontal>
             <FormGroup controlId="invoiceNumber">
