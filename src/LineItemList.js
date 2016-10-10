@@ -41,13 +41,22 @@ class LineItemList extends Component {
     return (
         <Row key={index}>
           <Col sm={8}>
-            <FormControl type="text" value={lineItem.description} onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
+            <FormControl
+              type="text"
+              value={lineItem.description}
+              onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
           </Col>
-          <Col sm={1}>
-            <FormControl type="number" value={lineItem.quantity} onChange={this.onLineItemQuantityChange.bind(this, index)}/>
+          <Col sm={1} style={{ paddingLeft: '7px', paddingRight: '7px' }}>
+            <FormControl
+              type="number"
+              value={lineItem.quantity}
+              onChange={this.onLineItemQuantityChange.bind(this, index)}/>
           </Col>
-          <Col sm={1}>
-            <FormControl type="number" value={lineItem.rate} onChange={this.onLineItemRateChange.bind(this, index)}/>
+          <Col sm={1} style={{ paddingLeft: '7px', paddingRight: '7px' }}>
+            <FormControl
+              type="number"
+              value={lineItem.rate}
+              onChange={this.onLineItemRateChange.bind(this, index)}/>
           </Col>
           <Col sm={1}>
             {lineItem.quantity * lineItem.rate}
