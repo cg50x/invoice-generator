@@ -37,28 +37,31 @@ class LineItemList extends Component {
     });
   }
 
+  renderLineItemRow(lineItem, index) {
+    return (
+        <Row key={index}>
+          <Col sm={8}>
+            <FormControl type="text" value={lineItem.description} onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
+          </Col>
+          <Col sm={1}>
+            <FormControl type="number" value={lineItem.quantity} onChange={this.onLineItemQuantityChange.bind(this, index)}/>
+          </Col>
+          <Col sm={1}>
+            <FormControl type="number" value={lineItem.rate} onChange={this.onLineItemRateChange.bind(this, index)}/>
+          </Col>
+          <Col sm={1}>
+            {lineItem.quantity * lineItem.rate}
+          </Col>
+          <Col sm={1}>
+            <Button bsStyle="danger" onClick={this.onLineItemDeleteClick.bind(this, index)}>X</Button>
+          </Col>
+        </Row>
+    );
+  }
+
 	render() {
 		let lineItems = this.props.lineItems;
-		let lineItemRows = lineItems.map((lineItem, index) => {
-			return (
-			  <Row key={index}>
-              <Col sm={8}>
-                <FormControl type="text" value={lineItem.description} onChange={this.onLineItemDescriptionChange.bind(this, index)}/>
-              </Col>
-              <Col sm={1}>
-                <FormControl type="number" value={lineItem.quantity} onChange={this.onLineItemQuantityChange.bind(this, index)}/>
-              </Col>
-              <Col sm={1}>
-                <FormControl type="number" value={lineItem.rate} onChange={this.onLineItemRateChange.bind(this, index)}/>
-              </Col>
-              <Col sm={1}>
-                {lineItem.quantity * lineItem.rate}
-              </Col>
-              <Col sm={1}>
-                <Button bsStyle="danger" onClick={this.onLineItemDeleteClick.bind(this, index)}>X</Button>
-              </Col>
-            </Row>
-		)});
+		let lineItemRows = lineItems.map(this.renderLineItemRow.bind(this));
 		let lineItemsTotal = lineItems.reduce((sum, lineItem) => {
 			return sum + lineItem.quantity * lineItem.rate;
 		}, 0);
