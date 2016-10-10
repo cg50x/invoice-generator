@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  PageHeader,
+  Button,
   Col,
-  Form,
-  FormGroup,
   ControlLabel,
+  Form,
   FormControl,
-  Button
+  FormGroup,
+  PageHeader,
+  Row
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -211,12 +212,14 @@ class App extends Component {
                 onChange={this.onFieldValueChange.bind(this, 'terms')}
               ></FormControl>
             </FormGroup>
-            <FormGroup>
-              <Col smOffset={10} sm={2}>
-                <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
-              </Col>
-            </FormGroup>
           </Form>
+        </div>
+        <div className="Footer-Container">
+          <div className="Footer">
+            <Col smOffset={10} sm={2}>
+              <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
+            </Col>
+          </div>
         </div>
       </div>
     );
