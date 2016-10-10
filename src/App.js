@@ -38,6 +38,7 @@ class App extends Component {
     this.onLineItemDeleteClick = this.onLineItemDeleteClick.bind(this);
     this.onLineItemAddClick = this.onLineItemAddClick.bind(this);
     this.onExampleLinkClick = this.onExampleLinkClick.bind(this);
+    this.onClearFormClick = this.onClearFormClick.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
@@ -131,6 +132,21 @@ class App extends Component {
       }],
       notes: 'This invoice does not include service fees.',
       terms: 'Payment must be made via PayPal.'
+    });
+  }
+
+  onClearFormClick() {
+    this.setState({
+      invoiceNumber: '',
+      fromName: '',
+      imageLogo: null,
+      paymentTerms: '',
+      toName: '',
+      date: '',
+      dueDate: '',
+      lineItems: [],
+      notes: '',
+      terms: ''
     });
   }
 
@@ -234,7 +250,10 @@ class App extends Component {
         </div>
         <div className="Footer-Container">
           <div className="Footer">
-            <Col smOffset={10} sm={2}>
+            <Col sm={2}>
+              <Button onClick={this.onClearFormClick}>Clear Form</Button>
+            </Col>
+            <Col smOffset={8} sm={2}>
               <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
             </Col>
           </div>
