@@ -6,8 +6,7 @@ import {
   Form,
   FormControl,
   FormGroup,
-  PageHeader,
-  Row
+  PageHeader
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
