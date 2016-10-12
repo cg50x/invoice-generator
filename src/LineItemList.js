@@ -37,6 +37,12 @@ class LineItemList extends Component {
     });
   }
 
+  getLineItemsTotal(lineItems) {
+    return lineItems.reduce((sum, lineItem) => {
+      return sum + lineItem.quantity * lineItem.rate;
+    }, 0);
+  }
+
   renderLineItemRow(lineItem, index) {
     return (
         <Row key={index}>
@@ -71,9 +77,7 @@ class LineItemList extends Component {
 	render() {
 		let lineItems = this.props.lineItems;
 		let lineItemRows = lineItems.map(this.renderLineItemRow.bind(this));
-		let lineItemsTotal = lineItems.reduce((sum, lineItem) => {
-			return sum + lineItem.quantity * lineItem.rate;
-		}, 0);
+		let lineItemsTotal = this.getLineItemsTotal(lineItems);
 		return (
       <div>
         <Row>
@@ -97,5 +101,17 @@ class LineItemList extends Component {
           );
 	}
 }
+
+LineItemList.propTypes = {
+  lineItems: React.PropTypes.array,
+  onLineItemDescriptionChange: React.PropTypes.func,
+  onLineItemQuantityChange: React.PropTypes.func,
+  onLineItemRateChange: React.PropTypes.func,
+  onLineItemDeleteClick: React.PropTypes.func
+}
+
+LineItemList.defaultProps = {
+  lineItems: []
+};
 
 export default LineItemList;

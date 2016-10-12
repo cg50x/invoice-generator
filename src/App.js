@@ -152,7 +152,7 @@ class App extends Component {
 
   onRemoveImageClick() {
     // Clear out the input file element
-    let inputElem = document.getElementById('image-logo-id');
+    let inputElem = document.getElementById('imageLogo');
     inputElem.value = '';
 
     // Clear out the imageLogo on the state
@@ -195,7 +195,7 @@ class App extends Component {
                 Logo
               </Col>
               <Col sm={10}>
-                <FormControl id="image-logo-id" type="file" onChange={this.onImageLogoChange.bind(this)}/>
+                <FormControl type="file" onChange={this.onImageLogoChange.bind(this)}/>
                 { this.state.imageLogo ? <a onClick={this.onRemoveImageClick}>Remove image</a> : null }
               </Col>
             </FormGroup>
