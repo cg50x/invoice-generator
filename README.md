@@ -1,4 +1,4 @@
-## Invoice Generator App
+# Invoice Generator App
 
 This webapp allows you to generate an invoice document as a PDF file. Just enter the information in the form and click 'Create Invoice'.
 
