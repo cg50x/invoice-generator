@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "currency-codes": "^1.1.2",
+    "currencyformatter.js": "^1.0.4",
+    "he": "^1.1.1",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.2"

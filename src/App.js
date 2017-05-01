@@ -8,27 +8,33 @@ import {
   FormGroup,
   PageHeader,
 } from 'react-bootstrap';
+import {codes} from 'currency-codes';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.css';
 import LineItemList from './LineItemList.js';
 import {saveInvoicePDF} from './PDFService.js';
 
+const currencyCodes = codes();
+
+const emptyState = {
+  invoiceNumber: '',
+  fromName: '',
+  imageLogo: null,
+  paymentTerms: '',
+  currency: 'USD',
+  toName: '',
+  date: '',
+  dueDate: '',
+  lineItems: [],
+  notes: '',
+  terms: '',
+};
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      invoiceNumber: '',
-      fromName: '',
-      imageLogo: null,
-      paymentTerms: '',
-      toName: '',
-      date: '',
-      dueDate: '',
-      lineItems: [],
-      notes: '',
-      terms: ''
-    };
+    this.state = emptyState;
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
     this.onLineItemDescriptionChange = this.onLineItemDescriptionChange.bind(
@@ -120,6 +126,7 @@ class App extends Component {
       fromName: 'John Smith\n123 Address St.\nLos Angeles, CA 12345',
       imageLogo: null,
       paymentTerms: 'Biweekly',
+      currency: 'USD',
       toName: 'Jane Smith\n999 Address St.\nSeattle, WA 54321',
       date: '2016-10-10',
       dueDate: '2016-11-01',
@@ -141,18 +148,7 @@ class App extends Component {
   }
 
   onClearFormClick() {
-    this.setState({
-      invoiceNumber: '',
-      fromName: '',
-      imageLogo: null,
-      paymentTerms: '',
-      toName: '',
-      date: '',
-      dueDate: '',
-      lineItems: [],
-      notes: '',
-      terms: ''
-    });
+    this.setState(emptyState);
   }
 
   onRemoveImageClick() {
@@ -249,6 +245,18 @@ class App extends Component {
                 />
               </Col>
             </FormGroup>
+            <FormGroup controlId="dueDate">
+              <Col componentClass={ControlLabel} sm={2}>
+                Due Date
+              </Col>
+              <Col sm={10}>
+                <FormControl
+                  type="date"
+                  value={this.state.dueDate}
+                  onChange={this.onFieldValueChange.bind(this, 'dueDate')}
+                />
+              </Col>
+            </FormGroup>
             <FormGroup controlId="paymentTerms">
               <Col componentClass={ControlLabel} sm={2}>
                 Payment Terms
@@ -261,16 +269,28 @@ class App extends Component {
                 />
               </Col>
             </FormGroup>
-            <FormGroup controlId="dueDate">
-              <Col componentClass={ ControlLabel } sm={2}>
-                Due Date
+            <FormGroup controlId="currency">
+              <Col componentClass={ControlLabel} sm={2}>
+                Currency
               </Col>
               <Col sm={10}>
-                <FormControl type="date" value={this.state.dueDate} onChange={this.onFieldValueChange.bind(this, 'dueDate')}/>
+                <FormControl
+                  componentClass="select"
+                  placeholder="Select currency"
+                  defaultValue={this.state.currency}
+                  onChange={this.onFieldValueChange.bind(this, 'currency')}
+                >
+                  {currencyCodes.map((currencyCode, index) => (
+                    <option value={currencyCode} key={index}>
+                      {currencyCode}
+                    </option>
+                  ))}
+                </FormControl>
               </Col>
             </FormGroup>
             <LineItemList
               lineItems={this.state.lineItems}
+              currency={this.state.currency}
               onLineItemDescriptionChange={this.onLineItemDescriptionChange}
               onLineItemQuantityChange={this.onLineItemQuantityChange}
               onLineItemRateChange={this.onLineItemRateChange}

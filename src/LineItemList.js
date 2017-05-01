@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import {Button, Row, Col, FormControl} from 'react-bootstrap';
 
+import {format} from 'currencyformatter.js';
+import {decode} from 'he';
+
 class LineItemList extends Component {
   onLineItemDescriptionChange(index, event) {
     this.props.onLineItemDescriptionChange({
@@ -62,8 +65,12 @@ class LineItemList extends Component {
             onChange={this.onLineItemRateChange.bind(this, index)}
           />
         </Col>
-        <Col sm={1} />
-          {lineItem.quantity * lineItem.rate}
+        <Col sm={1}>
+          {decode(
+            format(lineItem.quantity * lineItem.rate, {
+              currency: this.props.currency,
+            })
+          )}
         </Col>
         <Col sm={1}>
           <Button
@@ -99,8 +106,10 @@ class LineItemList extends Component {
           </Col>
           <Col sm={1} />
           <Col sm={1}>Total</Col>
-          <Col sm={1}>{lineItemsTotal}</Col>
-          <Col sm={1}></Col>
+          <Col sm={1}>
+            {decode(format(lineItemsTotal, {currency: this.props.currency}))}
+          </Col>
+          <Col sm={1} />
         </Row>
       </div>
     );

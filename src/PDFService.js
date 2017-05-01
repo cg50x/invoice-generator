@@ -1,3 +1,6 @@
+import {format} from 'currencyformatter.js';
+import {decode} from 'he';
+
 const pdfMake = window.pdfMake;
 
 export function saveInvoicePDF(params) {
@@ -73,7 +76,7 @@ function buildHeaderInformation(params) {
           {
             columns: [
               {
-                width: 60,
+                width: 50,
                 text: '',
               },
               {
@@ -102,10 +105,10 @@ function buildHeaderInformation(params) {
 }
 
 function buildLineItemsTable(params) {
-  let lineItemRows = params.lineItems.map(buildLineItem);
+  let lineItemRows = params.lineItems.map(buildLineItem(params));
   return {
     table: {
-      widths: ['*', '10%', '10%', '10%'],
+      widths: ['*', '10%', '10%', '20%'],
       headerRows: 1,
       body: [
         [
@@ -127,7 +130,7 @@ function buildTotal(params) {
   }, 0);
   return {
     table: {
-      widths: ['*', '10%'],
+      widths: ['*', '20%'],
       body: [
         [
           {
@@ -135,7 +138,7 @@ function buildTotal(params) {
             alignment: 'right',
           },
           {
-            text: String(total),
+            text: decode(format(total, {currency: params.currency})),
             alignment: 'right',
           },
         ],
@@ -165,13 +168,25 @@ function buildNotesAndTerms(params) {
   return result;
 }
 
-function buildLineItem(lineItem) {
-  return [
-    lineItem.description,
-    {text: String(lineItem.quantity), alignment: 'right'},
-    {text: String(lineItem.rate), alignment: 'right'},
-    {text: String(lineItem.quantity * lineItem.rate), alignment: 'right'},
-  ];
+function buildLineItem(params) {
+  return function buildLineItemCurried(lineItem) {
+    return [
+      lineItem.description,
+      {text: String(lineItem.quantity), alignment: 'right'},
+      {
+        text: decode(format(lineItem.rate, {currency: params.currency})),
+        alignment: 'right',
+      },
+      {
+        text: decode(
+          format(lineItem.quantity * lineItem.rate, {
+            currency: params.currency,
+          })
+        ),
+        alignment: 'right',
+      },
+    ];
+  };
 }
 
 function buildImageLogo(params) {
