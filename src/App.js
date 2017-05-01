@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Button,
   Col,
@@ -6,13 +6,13 @@ import {
   Form,
   FormControl,
   FormGroup,
-  PageHeader
+  PageHeader,
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.css';
 import LineItemList from './LineItemList.js';
-import { saveInvoicePDF } from './PDFService.js';
+import {saveInvoicePDF} from './PDFService.js';
 
 class App extends Component {
   constructor() {
@@ -31,7 +31,9 @@ class App extends Component {
     };
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
-    this.onLineItemDescriptionChange = this.onLineItemDescriptionChange.bind(this);
+    this.onLineItemDescriptionChange = this.onLineItemDescriptionChange.bind(
+      this
+    );
     this.onLineItemQuantityChange = this.onLineItemQuantityChange.bind(this);
     this.onLineItemRateChange = this.onLineItemRateChange.bind(this);
     this.onLineItemDeleteClick = this.onLineItemDeleteClick.bind(this);
@@ -45,7 +47,7 @@ class App extends Component {
   onInvoiceNumberChange(event) {
     let newVal = event.target.value;
     this.setState({
-      invoiceNumber: newVal
+      invoiceNumber: newVal,
     });
   }
 
@@ -67,10 +69,10 @@ class App extends Component {
 
   onLineItemDescriptionChange(params) {
     let lineItems = this.state.lineItems;
-    let lineItem = lineItems[params.index]
+    let lineItem = lineItems[params.index];
     lineItem.description = params.newDescription;
     this.setState({
-      lineItems: lineItems
+      lineItems: lineItems,
     });
   }
 
@@ -79,7 +81,7 @@ class App extends Component {
     let lineItem = lineItems[params.index];
     lineItem.quantity = params.newQuantity;
     this.setState({
-      lineItems: lineItems
+      lineItems: lineItems,
     });
   }
 
@@ -88,7 +90,7 @@ class App extends Component {
     let lineItem = lineItems[params.index];
     lineItem.rate = params.newRate;
     this.setState({
-      lineItems: lineItems
+      lineItems: lineItems,
     });
   }
 
@@ -96,7 +98,7 @@ class App extends Component {
     let lineItems = this.state.lineItems;
     lineItems.splice(params.index, 1);
     this.setState({
-      lineItems: lineItems
+      lineItems: lineItems,
     });
   }
 
@@ -105,10 +107,10 @@ class App extends Component {
     lineItems.push({
       description: '',
       quantity: 0,
-      rate: 0
+      rate: 0,
     });
     this.setState({
-      lineItems: lineItems
+      lineItems: lineItems,
     });
   }
 
@@ -121,17 +123,20 @@ class App extends Component {
       toName: 'Jane Smith\n999 Address St.\nSeattle, WA 54321',
       date: '2016-10-10',
       dueDate: '2016-11-01',
-      lineItems: [{
-        description: 'Item #1',
-        quantity: 1,
-        rate: 1.50
-      }, {
-        description: 'Item #2',
-        quantity: 2,
-        rate: 2.50
-      }],
+      lineItems: [
+        {
+          description: 'Item #1',
+          quantity: 1,
+          rate: 1.50,
+        },
+        {
+          description: 'Item #2',
+          quantity: 2,
+          rate: 2.50,
+        },
+      ],
       notes: 'This invoice does not include service fees.',
-      terms: 'Payment must be made via PayPal.'
+      terms: 'Payment must be made via PayPal.',
     });
   }
 
@@ -157,7 +162,7 @@ class App extends Component {
 
     // Clear out the imageLogo on the state
     this.setState({
-      imageLogo: null
+      imageLogo: null,
     });
   }
 
@@ -170,57 +175,90 @@ class App extends Component {
       <div className="App">
         <PageHeader>Invoice Generator</PageHeader>
         <p>
-          This is an invoice generator. Fill in the fields below and click 'Create Invoice' to generate the invoice as a PDF document. <a onClick={this.onExampleLinkClick}>Click here</a> to see an example.
+          This is an invoice generator. Fill in the fields below and click 'Create Invoice' to generate the invoice as a PDF document.
+          {' '}
+          <a onClick={this.onExampleLinkClick}>Click here</a>
+          {' '}
+          to see an example.
         </p>
         <div className="App-invoice">
           <Form horizontal>
             <FormGroup controlId="invoiceNumber">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 Invoice #
               </Col>
               <Col sm={10}>
-                <FormControl type="text" value={this.state.invoiceNumber} onChange={this.onFieldValueChange.bind(this, 'invoiceNumber')}/>
+                <FormControl
+                  type="text"
+                  value={this.state.invoiceNumber}
+                  onChange={this.onFieldValueChange.bind(this, 'invoiceNumber')}
+                />
               </Col>
             </FormGroup>
             <FormGroup controlId="fromName">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 From
               </Col>
               <Col sm={10}>
-                <FormControl componentClass="textarea" rows="3" placeholder="Who is this invoice from?" value={this.state.fromName} onChange={this.onFieldValueChange.bind(this, 'fromName')}/>
+                <FormControl
+                  componentClass="textarea"
+                  rows="3"
+                  placeholder="Who is this invoice from?"
+                  value={this.state.fromName}
+                  onChange={this.onFieldValueChange.bind(this, 'fromName')}
+                />
               </Col>
             </FormGroup>
             <FormGroup controlId="imageLogo">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 Logo
               </Col>
               <Col sm={10}>
-                <FormControl type="file" onChange={this.onImageLogoChange.bind(this)}/>
-                { this.state.imageLogo ? <a onClick={this.onRemoveImageClick}>Remove image</a> : null }
+                <FormControl
+                  type="file"
+                  onChange={this.onImageLogoChange.bind(this)}
+                />
+                {this.state.imageLogo
+                  ? <a onClick={this.onRemoveImageClick}>Remove image</a>
+                  : null}
               </Col>
             </FormGroup>
             <FormGroup controlId="toName">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 Bill To
               </Col>
               <Col sm={10}>
-                <FormControl componentClass="textarea" rows="3" placeholder="Who is this invoice to?" value={this.state.toName} onChange={this.onFieldValueChange.bind(this, 'toName')}/>
+                <FormControl
+                  componentClass="textarea"
+                  rows="3"
+                  placeholder="Who is this invoice to?"
+                  value={this.state.toName}
+                  onChange={this.onFieldValueChange.bind(this, 'toName')}
+                />
               </Col>
             </FormGroup>
             <FormGroup controlId="date">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 Date
               </Col>
               <Col sm={10}>
-                <FormControl type="date" value={this.state.date} onChange={this.onFieldValueChange.bind(this, 'date')}/>
+                <FormControl
+                  type="date"
+                  value={this.state.date}
+                  onChange={this.onFieldValueChange.bind(this, 'date')}
+                />
               </Col>
             </FormGroup>
             <FormGroup controlId="paymentTerms">
-              <Col componentClass={ ControlLabel } sm={2}>
+              <Col componentClass={ControlLabel} sm={2}>
                 Payment Terms
               </Col>
               <Col sm={10}>
-                <FormControl type="text" value={this.state.paymentTerms} onChange={this.onFieldValueChange.bind(this, 'paymentTerms')}/>
+                <FormControl
+                  type="text"
+                  value={this.state.paymentTerms}
+                  onChange={this.onFieldValueChange.bind(this, 'paymentTerms')}
+                />
               </Col>
             </FormGroup>
             <FormGroup controlId="dueDate">
@@ -238,8 +276,7 @@ class App extends Component {
               onLineItemRateChange={this.onLineItemRateChange}
               onLineItemDeleteClick={this.onLineItemDeleteClick}
               onLineItemAddClick={this.onLineItemAddClick}
-              >
-            </LineItemList>
+            />
             <FormGroup>
               <ControlLabel>Notes</ControlLabel>
               <FormControl
@@ -247,7 +284,7 @@ class App extends Component {
                 placeholder="Notes - any relevant information not already covered"
                 value={this.state.notes}
                 onChange={this.onFieldValueChange.bind(this, 'notes')}
-              ></FormControl>
+              />
             </FormGroup>
             <FormGroup>
               <ControlLabel>Terms</ControlLabel>
@@ -256,7 +293,7 @@ class App extends Component {
                 placeholder="Terms and conditions - late fees, payment methods, delivery schedule"
                 value={this.state.terms}
                 onChange={this.onFieldValueChange.bind(this, 'terms')}
-              ></FormControl>
+              />
             </FormGroup>
           </Form>
         </div>
@@ -266,7 +303,9 @@ class App extends Component {
               <Button onClick={this.onClearFormClick}>Clear Form</Button>
             </Col>
             <Col smOffset={8} sm={2}>
-              <Button onClick={this.onSubmitClick} bsStyle="primary">Create Invoice</Button>
+              <Button onClick={this.onSubmitClick} bsStyle="primary">
+                Create Invoice
+              </Button>
             </Col>
           </div>
         </div>
