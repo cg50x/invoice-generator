@@ -76,21 +76,13 @@ function buildHeaderInformation(params) {
           {
             columns: [
               {
-                width: 50,
-                text: '',
+                width: '63%',
+                stack: ['Date', 'Payment Terms', 'Due Date'],
+                alignment: 'right',
               },
               {
-                width: '*',
-                columns: [
-                  {
-                    stack: ['Date', 'Payment Terms', 'Due Date'],
-                    alignment: 'right',
-                  },
-                  {
-                    stack: [params.date, params.paymentTerms, params.dueDate],
-                    alignment: 'right',
-                  },
-                ],
+                stack: [params.date, params.paymentTerms, params.dueDate],
+                alignment: 'right',
               },
             ],
           },
@@ -108,7 +100,7 @@ function buildLineItemsTable(params) {
   let lineItemRows = params.lineItems.map(buildLineItem(params));
   return {
     table: {
-      widths: ['*', '10%', '10%', '20%'],
+      widths: ['*', '11%', '11%', '18%'],
       headerRows: 1,
       body: [
         [
@@ -130,7 +122,7 @@ function buildTotal(params) {
   }, 0);
   return {
     table: {
-      widths: ['*', '20%'],
+      widths: ['*', '18%'],
       body: [
         [
           {
