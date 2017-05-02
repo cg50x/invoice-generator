@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Button, Row, Col, FormControl} from 'react-bootstrap';
 
 import {format} from 'currencyformatter.js';
-import {decode} from 'he';
+import decode from './decode.js';
 
 class LineItemList extends Component {
   onLineItemDescriptionChange(index, event) {

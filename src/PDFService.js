@@ -1,5 +1,5 @@
 import {format} from 'currencyformatter.js';
-import {decode} from 'he';
+import decode from './decode.js';
 
 const pdfMake = window.pdfMake;
 
