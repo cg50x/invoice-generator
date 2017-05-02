@@ -1456,13 +1456,6 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-currency-codes@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/currency-codes/-/currency-codes-1.1.2.tgz#60d334279f819d29605c1ff518ade17ad6681308"
-  dependencies:
-    first-match "~0.0.1"
-    nub "~0.0.0"
-
 currencyformatter.js@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/currencyformatter.js/-/currencyformatter.js-1.0.4.tgz#0e16be1701fcfd282def63e33cbaf1373d72fec6"

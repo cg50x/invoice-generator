@@ -8,14 +8,14 @@ import {
   FormGroup,
   PageHeader,
 } from 'react-bootstrap';
-import {codes} from 'currency-codes';
+import {symbols} from 'currencyformatter.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.css';
 import LineItemList from './LineItemList.js';
 import {saveInvoicePDF} from './PDFService.js';
 
-const currencyCodes = codes();
+const currencyCodes = Object.keys(symbols);
 
 const emptyState = {
   invoiceNumber: '',
