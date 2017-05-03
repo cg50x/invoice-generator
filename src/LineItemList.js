@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import {Button, Row, Col, FormControl} from 'react-bootstrap';
 
-import {format} from 'currencyformatter.js';
+import {format, symbols} from 'currencyformatter.js';
 import decode from './decode.js';
+
+const currencyCodes = Object.keys(symbols);
 
 class LineItemList extends Component {
   onLineItemDescriptionChange(index, event) {
@@ -117,6 +119,7 @@ class LineItemList extends Component {
 }
 
 LineItemList.propTypes = {
+  currency: React.PropTypes.oneOf(currencyCodes),
   lineItems: React.PropTypes.array,
   onLineItemDescriptionChange: React.PropTypes.func,
   onLineItemQuantityChange: React.PropTypes.func,
