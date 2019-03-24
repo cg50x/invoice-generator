@@ -173,7 +173,8 @@ class App extends Component {
         <p>
           This is an invoice generator. Fill in the fields below and click
           'Create Invoice' to generate the invoice as a PDF document.{' '}
-          <a onClick={this.onExampleLinkClick}>Click here</a> to see an example.
+          <button onClick={this.onExampleLinkClick}>Click here</button> to see
+          an example.
         </p>
         <div className="App-invoice">
           <Form horizontal>
@@ -213,7 +214,9 @@ class App extends Component {
                   onChange={this.onImageLogoChange.bind(this)}
                 />
                 {this.state.imageLogo ? (
-                  <a onClick={this.onRemoveImageClick}>Remove image</a>
+                  <button onClick={this.onRemoveImageClick}>
+                    Remove image
+                  </button>
                 ) : null}
               </Col>
             </FormGroup>
