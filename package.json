@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "currencyformatter.js": "^1.0.4",
+    "dequal": "^1.0.0",
     "prop-types": "15.7.2",
     "react": "^16.8.5",
     "react-bootstrap": "^0.31.3",

@@ -1,25 +1,31 @@
 .App {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 940px;
-
+  display: flex;
   /* Making room for the fixed footer */
   padding-bottom: 60px;
 }
 
-.Footer-Container {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+.App > *:nth-child(1) {
+  flex: 0 0 auto;
+  width: 1020px;
+  padding: 0 40px;
+}
 
-	background-color: #eee;
-	padding: 10px 0;
+.App > *:nth-child(2) {
+  flex: 1 0 auto;
+}
+
+.Footer-Container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background-color: #eee;
+  padding: 10px 0;
 }
 
 .Footer {
-	margin-left: auto;
-	margin-right: auto;
-	width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 940px;
 }
