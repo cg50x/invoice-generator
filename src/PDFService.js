@@ -1,6 +1,3 @@
-import { format } from 'currencyformatter.js';
-import decode from './decode.js';
-
 const pdfMake = window.pdfMake;
 
 export function saveInvoicePDF(params) {
@@ -44,6 +41,20 @@ function buildDocDefinition(params) {
 }
 
 function buildHeaderInformation(params) {
+  const optionalDataKeys = [];
+  const optionalDataValues = [];
+
+  Object.entries({
+    Date: params.date,
+    'Payment Terms': params.paymentTerms,
+    'Due Date': params.dueDate,
+  }).forEach(([key, value]) => {
+    if (value) {
+      optionalDataKeys.push(key);
+      optionalDataValues.push(value);
+    }
+  });
+
   return {
     columns: [
       {
@@ -76,13 +87,21 @@ function buildHeaderInformation(params) {
           {
             columns: [
               {
-                width: '63%',
-                stack: ['Date', 'Payment Terms', 'Due Date'],
-                alignment: 'right',
+                width: 50,
+                text: '',
               },
               {
-                stack: [params.date, params.paymentTerms, params.dueDate],
-                alignment: 'right',
+                width: '*',
+                columns: [
+                  {
+                    stack: optionalDataKeys,
+                    alignment: 'right',
+                  },
+                  {
+                    stack: optionalDataValues,
+                    alignment: 'right',
+                  },
+                ],
               },
             ],
           },
@@ -130,7 +149,7 @@ function buildTotal(params) {
             alignment: 'right',
           },
           {
-            text: decode(format(total, { currency: params.currency })),
+            text: `${total.toFixed(2)} ${params.currency}`,
             alignment: 'right',
           },
         ],
@@ -165,16 +184,11 @@ function buildLineItem(params) {
     return [
       lineItem.description,
       { text: String(lineItem.quantity), alignment: 'right' },
+      { text: `${lineItem.rate} ${params.currency}`, alignment: 'right' },
       {
-        text: decode(format(lineItem.rate, { currency: params.currency })),
-        alignment: 'right',
-      },
-      {
-        text: decode(
-          format(lineItem.quantity * lineItem.rate, {
-            currency: params.currency,
-          }),
-        ),
+        text: `${(lineItem.quantity * lineItem.rate).toFixed(2)} ${
+          params.currency
+        }`,
         alignment: 'right',
       },
     ];
@@ -186,7 +200,6 @@ function buildImageLogo(params) {
   if (params.imageLogo) {
     result.push({
       image: params.imageLogo,
-      width: 150,
     });
   }
   return result;
