@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Button,
   Col,
@@ -8,12 +8,12 @@ import {
   FormGroup,
   PageHeader,
 } from 'react-bootstrap';
-import {symbols} from 'currencyformatter.js';
+import { symbols } from 'currencyformatter.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.css';
 import LineItemList from './LineItemList.js';
-import {saveInvoicePDF} from './PDFService.js';
+import { saveInvoicePDF } from './PDFService.js';
 
 const currencyCodes = Object.keys(symbols);
 
@@ -38,7 +38,7 @@ class App extends Component {
 
     this.onFieldValueChange = this.onFieldValueChange.bind(this);
     this.onLineItemDescriptionChange = this.onLineItemDescriptionChange.bind(
-      this
+      this,
     );
     this.onLineItemQuantityChange = this.onLineItemQuantityChange.bind(this);
     this.onLineItemRateChange = this.onLineItemRateChange.bind(this);
@@ -134,12 +134,12 @@ class App extends Component {
         {
           description: 'Item #1',
           quantity: 1,
-          rate: 1.50,
+          rate: 1.5,
         },
         {
           description: 'Item #2',
           quantity: 2,
-          rate: 2.50,
+          rate: 2.5,
         },
       ],
       notes: 'This invoice does not include service fees.',
@@ -171,11 +171,9 @@ class App extends Component {
       <div className="App">
         <PageHeader>Invoice Generator</PageHeader>
         <p>
-          This is an invoice generator. Fill in the fields below and click 'Create Invoice' to generate the invoice as a PDF document.
-          {' '}
-          <a onClick={this.onExampleLinkClick}>Click here</a>
-          {' '}
-          to see an example.
+          This is an invoice generator. Fill in the fields below and click
+          'Create Invoice' to generate the invoice as a PDF document.{' '}
+          <a onClick={this.onExampleLinkClick}>Click here</a> to see an example.
         </p>
         <div className="App-invoice">
           <Form horizontal>
@@ -214,9 +212,9 @@ class App extends Component {
                   type="file"
                   onChange={this.onImageLogoChange.bind(this)}
                 />
-                {this.state.imageLogo
-                  ? <a onClick={this.onRemoveImageClick}>Remove image</a>
-                  : null}
+                {this.state.imageLogo ? (
+                  <a onClick={this.onRemoveImageClick}>Remove image</a>
+                ) : null}
               </Col>
             </FormGroup>
             <FormGroup controlId="toName">
