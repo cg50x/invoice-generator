@@ -57,6 +57,7 @@ class LineItemList extends Component {
         <Col sm={1} style={{ paddingLeft: '7px', paddingRight: '7px' }}>
           <FormControl
             type="number"
+            step="0.1"
             value={lineItem.quantity}
             onChange={this.onLineItemQuantityChange.bind(this, index)}
           />
