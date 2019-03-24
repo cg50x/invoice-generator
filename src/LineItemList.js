@@ -14,27 +14,27 @@ class LineItemList extends Component {
   onLineItemDescriptionChange(index, event) {
     this.props.onLineItemDescriptionChange({
       index: index,
-      newDescription: event.target.value
+      newDescription: event.target.value,
     });
   }
 
   onLineItemQuantityChange(index, event) {
     this.props.onLineItemQuantityChange({
       index: index,
-      newQuantity: event.target.value
+      newQuantity: event.target.value,
     });
   }
 
   onLineItemRateChange(index, event) {
     this.props.onLineItemRateChange({
       index: index,
-      newRate: event.target.value
+      newRate: event.target.value,
     });
   }
 
   onLineItemDeleteClick(index) {
     this.props.onLineItemDeleteClick({
-      index: index
+      index: index,
     });
   }
 
@@ -125,11 +125,11 @@ LineItemList.propTypes = {
   onLineItemDescriptionChange: PropTypes.func,
   onLineItemQuantityChange: PropTypes.func,
   onLineItemRateChange: PropTypes.func,
-  onLineItemDeleteClick: PropTypes.func
+  onLineItemDeleteClick: PropTypes.func,
 };
 
 LineItemList.defaultProps = {
-  lineItems: []
+  lineItems: [],
 };
 
 export default LineItemList;
