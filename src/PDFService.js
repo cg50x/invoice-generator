@@ -10,7 +10,7 @@ export function saveInvoicePDF(params) {
     fileReader.addEventListener(
       'load',
       onDataURLLoaded.bind(null, params, fileReader),
-      false
+      false,
     );
     fileReader.readAsDataURL(params.imageLogo);
   } else {
@@ -38,8 +38,8 @@ function buildDocDefinition(params) {
       buildHeaderInformation(params),
       buildLineItemsTable(params),
       buildTotal(params),
-      ...buildNotesAndTerms(params)
-    ]
+      ...buildNotesAndTerms(params),
+    ],
   };
 }
 
@@ -51,48 +51,48 @@ function buildHeaderInformation(params) {
           ...buildImageLogo(params),
           {
             text: params.fromName,
-            margin: [0, 30, 0, 30]
+            margin: [0, 30, 0, 30],
           },
           {
             text: 'Bill To',
-            margin: [0, 0, 0, 0]
+            margin: [0, 0, 0, 0],
           },
           {
-            text: params.toName
-          }
-        ]
+            text: params.toName,
+          },
+        ],
       },
       {
         stack: [
           {
             text: 'INVOICE',
-            fontSize: 25
+            fontSize: 25,
           },
           {
             text: `# ${params.invoiceNumber}`,
             fontSize: 15,
-            margin: [0, 0, 0, 30]
+            margin: [0, 0, 0, 30],
           },
           {
             columns: [
               {
                 width: '63%',
                 stack: ['Date', 'Payment Terms', 'Due Date'],
-                alignment: 'right'
+                alignment: 'right',
               },
               {
                 stack: [params.date, params.paymentTerms, params.dueDate],
-                alignment: 'right'
-              }
-            ]
-          }
+                alignment: 'right',
+              },
+            ],
+          },
         ],
-        alignment: 'right'
-      }
+        alignment: 'right',
+      },
     ],
     // optional space between columns
     columnGap: 10,
-    margin: [0, 0, 0, 30]
+    margin: [0, 0, 0, 30],
   };
 }
 
@@ -107,12 +107,12 @@ function buildLineItemsTable(params) {
           'Item',
           { text: 'Quantity', alignment: 'right' },
           { text: 'Rate', alignment: 'right' },
-          { text: 'Amount', alignment: 'right' }
+          { text: 'Amount', alignment: 'right' },
         ],
-        ...lineItemRows
-      ]
+        ...lineItemRows,
+      ],
     },
-    layout: 'lightHorizontalLines'
+    layout: 'lightHorizontalLines',
   };
 }
 
@@ -127,17 +127,17 @@ function buildTotal(params) {
         [
           {
             text: 'Total',
-            alignment: 'right'
+            alignment: 'right',
           },
           {
             text: decode(format(total, { currency: params.currency })),
-            alignment: 'right'
-          }
-        ]
-      ]
+            alignment: 'right',
+          },
+        ],
+      ],
     },
     layout: 'noBorders',
-    margin: [0, 0, 0, 30]
+    margin: [0, 0, 0, 30],
   };
 }
 
@@ -148,13 +148,13 @@ function buildNotesAndTerms(params) {
   if (params.notes) {
     result = result.concat([
       { text: 'Notes' },
-      { text: params.notes, margin: [0, 0, 0, 30] }
+      { text: params.notes, margin: [0, 0, 0, 30] },
     ]);
   }
   if (params.terms) {
     result = result.concat([
       { text: 'Terms' },
-      { text: params.terms, margin: [0, 0, 0, 30] }
+      { text: params.terms, margin: [0, 0, 0, 30] },
     ]);
   }
   return result;
@@ -167,16 +167,16 @@ function buildLineItem(params) {
       { text: String(lineItem.quantity), alignment: 'right' },
       {
         text: decode(format(lineItem.rate, { currency: params.currency })),
-        alignment: 'right'
+        alignment: 'right',
       },
       {
         text: decode(
           format(lineItem.quantity * lineItem.rate, {
-            currency: params.currency
-          })
+            currency: params.currency,
+          }),
         ),
-        alignment: 'right'
-      }
+        alignment: 'right',
+      },
     ];
   };
 }
@@ -185,7 +185,8 @@ function buildImageLogo(params) {
   let result = [];
   if (params.imageLogo) {
     result.push({
-      image: params.imageLogo
+      image: params.imageLogo,
+      width: 150,
     });
   }
   return result;
