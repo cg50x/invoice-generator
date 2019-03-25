@@ -10,7 +10,7 @@ export default function useLocalStorage(
 
     // Try to parse the value and fall back to value
     try {
-      value = JSON.parse(localStorage.getItem(key));
+      value = JSON.parse(localStorage.getItem(key) || '');
     } catch (err) {
       value = localStorage.getItem(key);
     }
