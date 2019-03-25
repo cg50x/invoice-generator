@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import {Button, Row, Col, FormControl} from 'react-bootstrap';
+import { Button, Row, Col, FormControl } from 'react-bootstrap';
 
-import {format, symbols} from 'currencyformatter.js';
+import { format, symbols } from 'currencyformatter.js';
 import decode from './decode.js';
 
 const currencyCodes = Object.keys(symbols);
@@ -53,14 +54,15 @@ class LineItemList extends Component {
             onChange={this.onLineItemDescriptionChange.bind(this, index)}
           />
         </Col>
-        <Col sm={1} style={{paddingLeft: '7px', paddingRight: '7px'}}>
+        <Col sm={1} style={{ paddingLeft: '7px', paddingRight: '7px' }}>
           <FormControl
             type="number"
+            step="0.1"
             value={lineItem.quantity}
             onChange={this.onLineItemQuantityChange.bind(this, index)}
           />
         </Col>
-        <Col sm={1} style={{paddingLeft: '7px', paddingRight: '7px'}}>
+        <Col sm={1} style={{ paddingLeft: '7px', paddingRight: '7px' }}>
           <FormControl
             type="number"
             value={lineItem.rate}
@@ -70,7 +72,7 @@ class LineItemList extends Component {
         <Col sm={1}>
           {decode(
             format(lineItem.quantity * lineItem.rate, {
-              currency: this.props.currency,
+              currency: this.props.currency
             })
           )}
         </Col>
@@ -109,7 +111,7 @@ class LineItemList extends Component {
           <Col sm={1} />
           <Col sm={1}>Total</Col>
           <Col sm={1}>
-            {decode(format(lineItemsTotal, {currency: this.props.currency}))}
+            {decode(format(lineItemsTotal, { currency: this.props.currency }))}
           </Col>
           <Col sm={1} />
         </Row>
@@ -119,12 +121,12 @@ class LineItemList extends Component {
 }
 
 LineItemList.propTypes = {
-  currency: React.PropTypes.oneOf(currencyCodes),
-  lineItems: React.PropTypes.array,
-  onLineItemDescriptionChange: React.PropTypes.func,
-  onLineItemQuantityChange: React.PropTypes.func,
-  onLineItemRateChange: React.PropTypes.func,
-  onLineItemDeleteClick: React.PropTypes.func,
+  currency: PropTypes.oneOf(currencyCodes),
+  lineItems: PropTypes.array,
+  onLineItemDescriptionChange: PropTypes.func,
+  onLineItemQuantityChange: PropTypes.func,
+  onLineItemRateChange: PropTypes.func,
+  onLineItemDeleteClick: PropTypes.func,
 };
 
 LineItemList.defaultProps = {

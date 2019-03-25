@@ -1,6 +1,3 @@
-import {format} from 'currencyformatter.js';
-import decode from './decode.js';
-
 const pdfMake = window.pdfMake;
 
 export function saveInvoicePDF(params) {
@@ -10,7 +7,7 @@ export function saveInvoicePDF(params) {
     fileReader.addEventListener(
       'load',
       onDataURLLoaded.bind(null, params, fileReader),
-      false
+      false,
     );
     fileReader.readAsDataURL(params.imageLogo);
   } else {
@@ -44,6 +41,20 @@ function buildDocDefinition(params) {
 }
 
 function buildHeaderInformation(params) {
+  const optionalDataKeys = [];
+  const optionalDataValues = [];
+
+  Object.entries({
+    Date: params.date,
+    'Payment Terms': params.paymentTerms,
+    'Due Date': params.dueDate,
+  }).forEach(([key, value]) => {
+    if (value) {
+      optionalDataKeys.push(key);
+      optionalDataValues.push(value);
+    }
+  });
+
   return {
     columns: [
       {
@@ -76,13 +87,21 @@ function buildHeaderInformation(params) {
           {
             columns: [
               {
-                width: '63%',
-                stack: ['Date', 'Payment Terms', 'Due Date'],
-                alignment: 'right',
+                width: 50,
+                text: '',
               },
               {
-                stack: [params.date, params.paymentTerms, params.dueDate],
-                alignment: 'right',
+                width: '*',
+                columns: [
+                  {
+                    stack: optionalDataKeys,
+                    alignment: 'right',
+                  },
+                  {
+                    stack: optionalDataValues,
+                    alignment: 'right',
+                  },
+                ],
               },
             ],
           },
@@ -105,9 +124,9 @@ function buildLineItemsTable(params) {
       body: [
         [
           'Item',
-          {text: 'Quantity', alignment: 'right'},
-          {text: 'Rate', alignment: 'right'},
-          {text: 'Amount', alignment: 'right'},
+          { text: 'Quantity', alignment: 'right' },
+          { text: 'Rate', alignment: 'right' },
+          { text: 'Amount', alignment: 'right' },
         ],
         ...lineItemRows,
       ],
@@ -130,7 +149,7 @@ function buildTotal(params) {
             alignment: 'right',
           },
           {
-            text: decode(format(total, {currency: params.currency})),
+            text: `${total.toFixed(2)} ${params.currency}`,
             alignment: 'right',
           },
         ],
@@ -147,14 +166,14 @@ function buildNotesAndTerms(params) {
   console.log('params', params);
   if (params.notes) {
     result = result.concat([
-      {text: 'Notes'},
-      {text: params.notes, margin: [0, 0, 0, 30]},
+      { text: 'Notes' },
+      { text: params.notes, margin: [0, 0, 0, 30] },
     ]);
   }
   if (params.terms) {
     result = result.concat([
-      {text: 'Terms'},
-      {text: params.terms, margin: [0, 0, 0, 30]},
+      { text: 'Terms' },
+      { text: params.terms, margin: [0, 0, 0, 30] },
     ]);
   }
   return result;
@@ -164,17 +183,12 @@ function buildLineItem(params) {
   return function buildLineItemCurried(lineItem) {
     return [
       lineItem.description,
-      {text: String(lineItem.quantity), alignment: 'right'},
+      { text: String(lineItem.quantity), alignment: 'right' },
+      { text: `${lineItem.rate} ${params.currency}`, alignment: 'right' },
       {
-        text: decode(format(lineItem.rate, {currency: params.currency})),
-        alignment: 'right',
-      },
-      {
-        text: decode(
-          format(lineItem.quantity * lineItem.rate, {
-            currency: params.currency,
-          })
-        ),
+        text: `${(lineItem.quantity * lineItem.rate).toFixed(2)} ${
+          params.currency
+        }`,
         alignment: 'right',
       },
     ];
