@@ -6,6 +6,7 @@
     "react-scripts": "2.1.8"
   },
   "dependencies": {
+    "@types/react": "^16.8.8",
     "bootstrap": "^3.3.7",
     "currencyformatter.js": "^1.0.4",
     "dequal": "^1.0.0",
