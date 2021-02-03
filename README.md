@@ -8,11 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Clone this project and run the following commands:
 
-```
+```sh
 npm install
 npm start
 ```
 
 ## Notes
 
-- You need to enable popups in order to set the image logo. This is may be an issue with the pdfmake library. Need to find a solution for this.
+- You need to enable popups in order to set the image logo. This is may be an issue with the `pdfmake` library. Need to find a solution for this.
