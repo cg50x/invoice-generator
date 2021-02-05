@@ -9,7 +9,7 @@
     "@types/react": "17.0.0",
     "bootstrap": "3.4.1",
     "currencyformatter.js": "1.0.5",
-    "dequal": "1.0.1",
+    "dequal": "2.0.2",
     "prop-types": "15.7.2",
     "react": "17.0.1",
     "react-bootstrap": "0.31.5",
