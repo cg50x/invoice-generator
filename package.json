@@ -8,7 +8,7 @@
   "dependencies": {
     "@types/react": "17.0.0",
     "bootstrap": "3.4.1",
-    "currencyformatter.js": "1.0.5",
+    "currencyformatter.js": "2.2.0",
     "dequal": "1.0.1",
     "prop-types": "15.7.2",
     "react": "17.0.1",
