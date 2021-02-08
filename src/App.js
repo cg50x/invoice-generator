@@ -9,7 +9,7 @@ import {
   PageHeader,
 } from 'react-bootstrap';
 import { symbols } from 'currencyformatter.js';
-import dequal from 'dequal';
+import { dequal } from 'dequal';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './App.css';
