@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import {
   Button,
-  Col,
-  ControlLabel,
   Form,
-  FormControl,
-  FormGroup,
-  PageHeader,
 } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { symbols } from 'currencyformatter.js';
 import { dequal } from 'dequal';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -170,47 +167,50 @@ function App() {
   return (
     <div className="App">
       <div>
-        <PageHeader>Invoice Generator</PageHeader>
+        <div className="Page-Header">
+          <h1>Invoice Generator</h1>
+        </div>
         <p>
           This is an invoice generator. Fill in the fields below and click
-          'Create Invoice' to generate the invoice as a PDF document.{' '}
-          <button onClick={onExampleLinkClick}>Click here</button> to see an
-          example.
+          'Create Invoice' to generate the invoice as a PDF document.
+        </p>
+        <p className="mb-4">
+          <Button variant="secondary" size="sm" onClick={onExampleLinkClick}>Click here to see an example</Button>
         </p>
         <div className="App-invoice">
-          <Form horizontal>
-            <FormGroup controlId="invoiceNumber">
-              <Col componentClass={ControlLabel} sm={2}>
+          <Form>
+            <Form.Group as={Row} className="mb-3" controlId="invoiceNumber">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Invoice #
-              </Col>
-              <Col sm={10}>
-                <FormControl
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
                   type="text"
                   value={editedInvoice.invoiceNumber}
                   onChange={onFieldValueChange.bind(this, 'invoiceNumber')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="fromName">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="fromName">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 From
-              </Col>
-              <Col sm={10}>
-                <FormControl
-                  componentClass="textarea"
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  as="textarea"
                   rows="3"
                   placeholder="Who is this invoice from?"
                   value={editedInvoice.fromName}
                   onChange={onFieldValueChange.bind(this, 'fromName')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="imageLogo">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="imageLogo">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Logo
-              </Col>
-              <Col sm={10}>
-                <FormControl
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
                   type="file"
                   onChange={onImageLogoChange.bind(this)}
                 />
@@ -218,64 +218,64 @@ function App() {
                   <button onClick={onRemoveImageClick}>Remove image</button>
                 ) : null}
               </Col>
-            </FormGroup>
-            <FormGroup controlId="toName">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="toName">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Bill To
-              </Col>
-              <Col sm={10}>
-                <FormControl
-                  componentClass="textarea"
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  as="textarea"
                   rows="3"
                   placeholder="Who is this invoice to?"
                   value={editedInvoice.toName}
                   onChange={onFieldValueChange.bind(this, 'toName')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="date">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="date">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Date
-              </Col>
-              <Col sm={10}>
-                <FormControl
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
                   type="date"
                   value={editedInvoice.date}
                   onChange={onFieldValueChange.bind(this, 'date')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="dueDate">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="dueDate">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Due Date
-              </Col>
-              <Col sm={10}>
-                <FormControl
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
                   type="date"
                   value={editedInvoice.dueDate}
                   onChange={onFieldValueChange.bind(this, 'dueDate')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="paymentTerms">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="paymentTerms">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Payment Terms
-              </Col>
-              <Col sm={10}>
-                <FormControl
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
                   type="text"
                   value={editedInvoice.paymentTerms}
                   onChange={onFieldValueChange.bind(this, 'paymentTerms')}
                 />
               </Col>
-            </FormGroup>
-            <FormGroup controlId="currency">
-              <Col componentClass={ControlLabel} sm={2}>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="currency">
+              <Form.Label column sm="2" className="text-end fw-bold">
                 Currency
-              </Col>
-              <Col sm={10}>
-                <FormControl
-                  componentClass="select"
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  as="select"
                   placeholder="Select currency"
                   defaultValue={editedInvoice.currency}
                   onChange={onFieldValueChange.bind(this, 'currency')}
@@ -285,10 +285,11 @@ function App() {
                       {currencyCode}
                     </option>
                   ))}
-                </FormControl>
+                </Form.Control>
               </Col>
-            </FormGroup>
+            </Form.Group>
             <LineItemList
+              className="mb-3"
               lineItems={editedInvoice.lineItems}
               currency={editedInvoice.currency}
               onLineItemDescriptionChange={onLineItemDescriptionChange}
@@ -297,37 +298,39 @@ function App() {
               onLineItemDeleteClick={onLineItemDeleteClick}
               onLineItemAddClick={onLineItemAddClick}
             />
-            <FormGroup>
-              <ControlLabel>Notes</ControlLabel>
-              <FormControl
-                componentClass="textarea"
+            <Form.Group>
+              <Form.Label className="fw-bold">Notes</Form.Label>
+              <Form.Control
+                as="textarea"
                 placeholder="Notes - any relevant information not already covered"
                 value={editedInvoice.notes}
                 onChange={onFieldValueChange.bind(this, 'notes')}
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Terms</ControlLabel>
-              <FormControl
-                componentClass="textarea"
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="fw-bold">Terms</Form.Label>
+              <Form.Control
+                as="textarea"
                 placeholder="Terms and conditions - late fees, payment methods, delivery schedule"
                 value={editedInvoice.terms}
                 onChange={onFieldValueChange.bind(this, 'terms')}
               />
-            </FormGroup>
+            </Form.Group>
           </Form>
         </div>
         <div className="Footer-Container">
-          <div className="Footer">
+          <Row className="Footer">
             <Col sm={2}>
-              <Button onClick={onClearFormClick}>Clear Form</Button>
+              <Button onClick={onClearFormClick} variant="light">
+                Clear Form
+              </Button>
             </Col>
-            <Col smOffset={8} sm={2}>
-              <Button onClick={onSubmitClick} bsStyle="primary">
+            <Col sm={{ span: 2, offset: 8}}>
+              <Button onClick={onSubmitClick} variant="primary">
                 Create Invoice
               </Button>
             </Col>
-          </div>
+          </Row>
         </div>
       </div>
       <div>
