@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Form,
-} from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { symbols } from 'currencyformatter.js';
@@ -175,7 +172,9 @@ function App() {
           'Create Invoice' to generate the invoice as a PDF document.
         </p>
         <p className="mb-4">
-          <Button variant="secondary" size="sm" onClick={onExampleLinkClick}>Click here to see an example</Button>
+          <Button variant="secondary" size="sm" onClick={onExampleLinkClick}>
+            Click here to see an example
+          </Button>
         </p>
         <div className="App-invoice">
           <Form>
@@ -325,7 +324,7 @@ function App() {
                 Clear Form
               </Button>
             </Col>
-            <Col sm={{ span: 2, offset: 8}}>
+            <Col sm={{ span: 2, offset: 8 }}>
               <Button onClick={onSubmitClick} variant="primary">
                 Create Invoice
               </Button>

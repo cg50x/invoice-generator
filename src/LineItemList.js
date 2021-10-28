@@ -74,8 +74,8 @@ class LineItemList extends Component {
         <Col sm={1}>
           {decode(
             format(lineItem.quantity * lineItem.rate, {
-              currency: this.props.currency
-            })
+              currency: this.props.currency,
+            }),
           )}
         </Col>
         <Col sm={1}>
@@ -97,10 +97,18 @@ class LineItemList extends Component {
     return (
       <div className={this.props.className}>
         <Row className="mb-2">
-          <Col sm={8} className="fw-bold">Item</Col>
-          <Col sm={1} className="fw-bold">Quantity</Col>
-          <Col sm={1} className="fw-bold">Rate</Col>
-          <Col sm={1} className="fw-bold">Amount</Col>
+          <Col sm={8} className="fw-bold">
+            Item
+          </Col>
+          <Col sm={1} className="fw-bold">
+            Quantity
+          </Col>
+          <Col sm={1} className="fw-bold">
+            Rate
+          </Col>
+          <Col sm={1} className="fw-bold">
+            Amount
+          </Col>
           <Col sm={1} />
         </Row>
         {lineItemRows}
@@ -111,7 +119,9 @@ class LineItemList extends Component {
             </Button>
           </Col>
           <Col sm={1} />
-          <Col sm={1} className="fw-bold">Total</Col>
+          <Col sm={1} className="fw-bold">
+            Total
+          </Col>
           <Col sm={1}>
             {decode(format(lineItemsTotal, { currency: this.props.currency }))}
           </Col>
