@@ -2,6 +2,9 @@
   display: flex;
   /* Making room for the fixed footer */
   padding-bottom: 60px;
+
+  /* Setting app font size to match the Bootstrap 3 default styling */
+  font-size: 14px;
 }
 
 .App > *:nth-child(1) {
@@ -12,6 +15,12 @@
 
 .App > *:nth-child(2) {
   flex: 1 0 auto;
+}
+
+.Page-Header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .Footer-Container {
